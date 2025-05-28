@@ -19,6 +19,8 @@ load_dotenv()  # This loads .env from the project root
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -81,7 +83,8 @@ INSTALLED_APPS = [
     'celery',
     'taskmanager',
     'rest_framework',
-    'crawler'
+    'crawler',
+    'gemini_app'
 ]
 CELERY_BROKER_URL = "redis://localhost:6379/0"
 INSTALLED_APPS += ["django_celery_beat"]

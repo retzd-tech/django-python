@@ -59,6 +59,8 @@ urlpatterns = [
     path('crawl-page/', crawl, name='crawl'),
     path('crawl/', crawl, name='crawl'),
 
+    path('gemini/', include('gemini_app.urls')),
+
     path('api/tasks-drf/', views.TaskView.as_view())
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
