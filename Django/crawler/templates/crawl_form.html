@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Crawler</title>
+</head>
+<body>
+  <form method="post" action="/crawl/">
+    {% csrf_token %}
+    <input type="text" name="url" placeholder="Enter URL" />
+    <button type="submit">Crawl</button>
+  </form>
+
+  <ul>
+    {% for result in results %}
+      <li>
+        <strong>{{ result.url }}</strong>: {{ result.title }}
+        {% if result.books %}
+          <ul>
+            {% for book in result.books %}
+              <li>
+                📚 <strong>{{ book.title }}</strong> - {{ book.price }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

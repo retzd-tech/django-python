@@ -1,0 +1,32 @@
+{
+  "title": "Django Logs (Elasticsearch)",
+  "panels": [
+    {
+      "type": "logs",
+      "title": "Live Django Logs",
+      "datasource": "Elasticsearch",
+      "targets": [
+        {
+          "refId": "A",
+          "query": "levelname:INFO OR levelname:ERROR"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 10 }
+    },
+    {
+      "type": "stat",
+      "title": "Error Rate (Last 5m)",
+      "targets": [
+        {
+          "refId": "B",
+          "query": "levelname:ERROR",
+          "metricField": "levelname"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 10, "w": 6, "h": 5 }
+    }
+  ],
+  "schemaVersion": 30,
+  "version": 1,
+  "editable": true
+}
