@@ -56,8 +56,8 @@ urlpatterns = [
 
     # Dependancies
     path('random-quote/', views.random_quote),
-    path('crawl-page/', crawl, name='crawl'),
     path('crawl/', crawl, name='crawl'),
+    path('add-data/', crawl, name='crawl'),
 
     path('gemini/', include('gemini_app.urls')),
 

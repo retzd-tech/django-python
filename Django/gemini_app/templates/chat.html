@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gemini Chatbot</title>
+  <style>
+    :root {
+      --bg-color: #1e1e2f;
+      --input-bg: #2a2a40;
+      --bot-color: #3a3a50;
+      --user-color: #4b6fff;
+      --text-color: #e0e0e0;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 1rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .bot {
+      background-color: var(--bot-color);
+      align-self: flex-start;
+    }
+
+    .user {
+      background-color: var(--user-color);
+      align-self: flex-end;
+    }
+
+    .chat-form {
+      display: flex;
+      padding: 1rem;
+      border-top: 1px solid #444;
+      background-color: var(--bg-color);
+    }
+
+    textarea {
+      flex: 1;
+      background-color: var(--input-bg);
+      border: 1px solid #444;
+      border-radius: 10px;
+      color: var(--text-color);
+      font-size: 1rem;
+      padding: 0.75rem;
+      resize: none;
+      height: 60px;
+    }
+
+    button {
+      background-color: var(--user-color);
+      color: white;
+      border: none;
+      padding: 0 1.5rem;
+      margin-left: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #3b5cff;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container" id="chat-box">
+    <h2>💬 Chat with Gemini</h2>
+    {% for msg in messages %}
+      <div class="message {{ msg.role }}">{{ msg.content }}</div>
+    {% endfor %}
+  </div>
+
+  <form method="POST" class="chat-form" id="chat-form">
+    {% csrf_token %}
+    <textarea name="prompt" id="prompt" placeholder="Ask me anything..."></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <script>
+    const textarea = document.getElementById("prompt");
+    const form = document.getElementById("chat-form");
+
+    // Press Enter to submit, Shift+Enter for newline
+    textarea.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        form.submit();
+      }
+    });
+
+    // Auto scroll to bottom
+    const chatBox = document.getElementById("chat-box");
+    chatBox.scrollTop = chatBox.scrollHeight;
+  </script>
+</body>
+</html>
